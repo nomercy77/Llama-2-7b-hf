@@ -26,7 +26,7 @@ class InferlessPythonModel:
     def run_function(self, message,
         chat_history,
         system_prompt,
-        max_new_tokens=1024,
+        max_new_tokens=300,
         temperature=0.8,
         top_p=0.95,
         top_k=5):
@@ -39,14 +39,6 @@ class InferlessPythonModel:
                                         skip_special_tokens=True)
         generate_kwargs = dict(
             inputs,
-            streamer=streamer,
-            max_new_tokens=max_new_tokens,
-            do_sample=True,
-            top_p=top_p,
-            top_k=top_k,
-            temperature=temperature,
-            num_beams=1,
-        )
         t = Thread(target=self.model.generate, kwargs=generate_kwargs)
         t.start()
 
